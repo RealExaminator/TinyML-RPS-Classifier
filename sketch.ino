@@ -15,12 +15,14 @@ void setup() {
   const tflite::Model* tflite_model = tflite::GetModel(model);
 
   // 2. Set up the Op Resolver (adding only what the model needs saves space)
-  static tflite::MicroMutableOpResolver<5> resolver;
+  static tflite::MicroMutableOpResolver<7> resolver;
   resolver.AddConv2D();
   resolver.AddMaxPool2D();
   resolver.AddReshape();
   resolver.AddFullyConnected();
   resolver.AddSoftmax();
+  resolver.AddQuantize()
+  resolver.AddDequantize()
 
   // 3. Build the interpreter
   static tflite::MicroInterpreter static_interpreter(
